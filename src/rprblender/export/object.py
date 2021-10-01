@@ -38,6 +38,11 @@ def sync(rpr_context, obj: bpy.types.Object, **kwargs):
 
     log("sync", obj, obj.type)
 
+    if obj.type in ('MESH', 'CURVE', 'FONT', 'SURFACE', 'META') \
+            and (len(obj.data.polygons)) > 1000000:
+        log.warn(f'Found object {obj.name_full} with {len(obj.data.polygons)} faces. '
+                 f'Consider simplifying geometry to less than 1 000 000 faces')
+
     if obj.type == 'MESH':
         if obj.mode == 'OBJECT':
             # if in edit mode use to_mesh
