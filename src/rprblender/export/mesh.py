@@ -66,9 +66,8 @@ class MeshData:
             return None
 
         if tris_len > TRIANGLES_LARGE_AMOUNT:
-            log.warn(f'Found object {obj.name_full} with {"{:,}".format(tris_len).replace(",", " ")} '
-                     f'triangles. Consider simplifying geometry to less than '
-                     f'{"{:,}".format(TRIANGLES_LARGE_AMOUNT).replace(",", " ")} triangles')
+            log.warn(f'Found object {obj.name_full} with {tris_len:,} triangles. '
+                     f'Consider simplifying geometry to less than {TRIANGLES_LARGE_AMOUNT:,} triangles')
 
         data = MeshData()
         data.vertices = get_data_from_collection(mesh.vertices, 'co', (len(mesh.vertices), 3))
