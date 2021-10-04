@@ -29,7 +29,7 @@ from rprblender.utils import logging
 log = logging.Log(tag='export.mesh')
 
 
-LARGE_FACES_AMOUNT = 1000000
+FACES_LARGE_AMOUNT = 1000000
 
 
 @dataclass(init=False)
@@ -315,7 +315,7 @@ def sync(rpr_context: RPRContext, obj: bpy.types.Object, **kwargs):
     """ Creates pyrpr.Shape from obj.data:bpy.types.Mesh """
 
     if obj.type in ('MESH', 'CURVE', 'FONT', 'SURFACE', 'META') \
-            and (len(obj.data.polygons)) > LARGE_FACES_AMOUNT:
+            and (len(obj.data.polygons)) > FACES_LARGE_AMOUNT:
         log.warn(f'Found object {obj.name_full} with {len(obj.data.polygons)} faces. '
                  f'Consider simplifying geometry to less than 1 000 000 faces')
 
