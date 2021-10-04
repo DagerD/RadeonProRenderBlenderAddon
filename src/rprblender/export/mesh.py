@@ -29,7 +29,7 @@ from rprblender.utils import logging
 log = logging.Log(tag='export.mesh')
 
 
-FACES_LARGE_AMOUNT = 1000000
+TRIANGLES_LARGE_AMOUNT = 1000000
 
 
 @dataclass(init=False)
@@ -64,6 +64,11 @@ class MeshData:
         tris_len = len(mesh.loop_triangles)
         if tris_len == 0:
             return None
+
+        if tris_len > TRIANGLES_LARGE_AMOUNT:
+            log.warn(f'Found object {obj.name_full} with {"{:,}".format(tris_len).replace(",", " ")} '
+                     f'triangles. Consider simplifying geometry to less than '
+                     f'{"{:,}".format(TRIANGLES_LARGE_AMOUNT).replace(",", " ")} triangles')
 
         data = MeshData()
         data.vertices = get_data_from_collection(mesh.vertices, 'co', (len(mesh.vertices), 3))
@@ -313,11 +318,6 @@ def sync_visibility(rpr_context, obj: bpy.types.Object, rpr_shape: pyrpr.Shape, 
 
 def sync(rpr_context: RPRContext, obj: bpy.types.Object, **kwargs):
     """ Creates pyrpr.Shape from obj.data:bpy.types.Mesh """
-
-    if obj.type in ('MESH', 'CURVE', 'FONT', 'SURFACE', 'META') \
-            and (len(obj.data.polygons)) > FACES_LARGE_AMOUNT:
-        log.warn(f'Found object {obj.name_full} with {len(obj.data.polygons)} faces. '
-                 f'Consider simplifying geometry to less than 1 000 000 faces')
 
     mesh = kwargs.get("mesh", obj.data)
     material_override = kwargs.get("material_override", None)
