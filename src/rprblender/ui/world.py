@@ -86,6 +86,9 @@ class RPR_EnvironmentOverride(RPR_Panel):
         row.prop(rpr, f'{self.type}_override', text="")
 
     def draw(self, context):
+        if context.scene.world is None:
+            return
+
         rpr = context.scene.world.rpr
 
         layout = self.layout
@@ -109,7 +112,11 @@ class RPR_WORLD_PT_background_override(RPR_EnvironmentOverride):
     type = 'background'
 
     def draw(self, context):
+        if context.scene.world is None:
+            return
+
         rpr = context.scene.world.rpr
+
         layout = self.layout
         layout.use_property_split = True
         layout.use_property_decorate = False
@@ -176,11 +183,14 @@ class RPR_WORLD_PT_sun_sky(RPR_Panel):
     @classmethod
     def poll(cls, context):
         if context.scene.world is None:
-            return
+            return super().poll(context)
 
         return super().poll(context) and context.scene.world.rpr.mode == 'SUN_SKY'
 
     def draw(self, context):
+        if context.scene.world is None:
+            return
+
         rpr = context.scene.world.rpr
         sun_sky = rpr.sun_sky
 
