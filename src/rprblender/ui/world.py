@@ -23,6 +23,13 @@ class RPR_WORLD_PT_environment(RPR_Panel):
     bl_space_type = "PROPERTIES"
     bl_context = 'world'
 
+    @classmethod
+    def poll(cls, context):
+        if not context.scene.world:
+            return False
+
+        return super().poll(context)
+
     def draw_header(self, context):
         self.layout.prop(context.scene.world.rpr, 'enabled', text="")
 

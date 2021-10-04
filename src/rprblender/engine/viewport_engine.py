@@ -501,8 +501,9 @@ class ViewportEngine(Engine):
 
         self.rpr_context.scene.set_name(scene.name)
 
-        self.world_settings = self._get_world_settings(depsgraph)
-        self.world_settings.export(self.rpr_context)
+        if scene.world:
+            self.world_settings = self._get_world_settings(depsgraph)
+            self.world_settings.export(self.rpr_context)
 
         rpr_camera = self.rpr_context.create_camera()
         rpr_camera.set_name("Camera")
