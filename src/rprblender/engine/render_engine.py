@@ -672,7 +672,7 @@ class RenderEngine(Engine):
             self.camera_data.export(rpr_camera)
 
         # Environment is synced once per frame
-        if scene.world is not None:
+        if scene.world:
             if scene.world.is_evaluated:  # for some reason World data can came in unevaluated
                 world_data = scene.world
             else:

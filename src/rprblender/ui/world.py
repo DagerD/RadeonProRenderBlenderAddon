@@ -23,19 +23,20 @@ class RPR_WORLD_PT_environment(RPR_Panel):
     bl_space_type = "PROPERTIES"
     bl_context = 'world'
 
-    def draw_header(self, context):
-        if context.scene.world is None:
-            return
+    @classmethod
+    def poll(cls, context):
+        if not context.scene.world:
+            return False
 
+        return super().poll(context)
+
+    def draw_header(self, context):
         self.layout.prop(context.scene.world.rpr, 'enabled', text="")
 
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
         layout.use_property_decorate = False
-
-        if context.scene.world is None:
-            return
 
         rpr = context.scene.world.rpr
 
@@ -77,18 +78,12 @@ class RPR_EnvironmentOverride(RPR_Panel):
     type = ''
 
     def draw_header(self, context):
-        if context.scene.world is None:
-            return
-
         rpr = context.scene.world.rpr
         row = self.layout.row()
         row.enabled = rpr.enabled
         row.prop(rpr, f'{self.type}_override', text="")
 
     def draw(self, context):
-        if context.scene.world is None:
-            return
-
         rpr = context.scene.world.rpr
 
         layout = self.layout
@@ -112,9 +107,6 @@ class RPR_WORLD_PT_background_override(RPR_EnvironmentOverride):
     type = 'background'
 
     def draw(self, context):
-        if context.scene.world is None:
-            return
-
         rpr = context.scene.world.rpr
 
         layout = self.layout
@@ -162,9 +154,6 @@ class RPR_WORLD_PT_gizmo(RPR_Panel):
     bl_parent_id = 'RPR_WORLD_PT_environment'
 
     def draw(self, context):
-        if context.scene.world is None:
-            return
-
         rpr = context.scene.world.rpr
 
         layout = self.layout
@@ -182,15 +171,9 @@ class RPR_WORLD_PT_sun_sky(RPR_Panel):
 
     @classmethod
     def poll(cls, context):
-        if context.scene.world is None:
-            return super().poll(context)
-
         return super().poll(context) and context.scene.world.rpr.mode == 'SUN_SKY'
 
     def draw(self, context):
-        if context.scene.world is None:
-            return
-
         rpr = context.scene.world.rpr
         sun_sky = rpr.sun_sky
 

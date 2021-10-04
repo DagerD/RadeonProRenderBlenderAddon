@@ -500,7 +500,7 @@ class ViewportEngine(Engine):
 
         self.rpr_context.scene.set_name(scene.name)
 
-        if scene.world is not None:
+        if scene.world:
             self.world_settings = self._get_world_settings(depsgraph)
             self.world_settings.export(self.rpr_context)
 
