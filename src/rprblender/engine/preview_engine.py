@@ -114,6 +114,7 @@ class PreviewEngine(Engine):
                             if obj.name.startswith('preview_')), None)
         if preview_obj and settings_scene.world and preview_obj.active_material \
                 and preview_obj.active_material.use_preview_world:
+            world.sync(self.rpr_context, settings_scene.world)
 
         self.rpr_context.enable_aov(pyrpr.AOV_COLOR)
         self.rpr_context.enable_aov(pyrpr.AOV_DEPTH)

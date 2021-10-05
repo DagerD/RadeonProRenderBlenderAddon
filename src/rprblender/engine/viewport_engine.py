@@ -868,7 +868,7 @@ class ViewportEngine(Engine):
             upscale_filter_settings['resolution'] = self.width, self.height
             self.setup_upscale_filter(upscale_filter_settings)
 
-        if self.world_settings.backplate:
+        if self.world_settings and self.world_settings.backplate:
             self.world_settings.backplate.export(self.rpr_context, (self.width, self.height))
 
         self.is_resized = True

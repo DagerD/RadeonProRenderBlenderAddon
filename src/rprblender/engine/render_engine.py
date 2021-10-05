@@ -680,8 +680,6 @@ class RenderEngine(Engine):
                     world_data = scene.world.evaluated_get(depsgraph)
                 world_settings = world.sync(self.rpr_context, world_data)
                 self.world_backplate = world_settings.backplate
-            world_settings = world.sync(self.rpr_context, world_data)
-            self.world_backplate = world_settings.backplate
 
             # EXPORT PARTICLES
             # Note: particles should be exported after motion blur,
