@@ -378,6 +378,11 @@ class RPR_ViewLayerProperites(RPR_Properties):
             'name': "Diffuse Albedo",
             'channel': 'RGB'
         },
+        {
+            'rpr': pyrpr.AOV_CAMERA_NORMAL,
+            'name': "Camera Normal",
+            'channel': 'X'
+        },
     )
 
     # we went over 32 aovs so these must be separated
