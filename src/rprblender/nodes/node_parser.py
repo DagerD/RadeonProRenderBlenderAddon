@@ -246,15 +246,17 @@ class BaseNodeParser(metaclass=ABCMeta):
 
     def export_muted(self):
         # export as a muted node
-        # pass through first linked socket of same output socket type
-        matching_incoming_socket = next((input for input in self.node.inputs
-            if isinstance(input, type(self.socket_out)) and input.is_linked), None)
-        if matching_incoming_socket:
-            return self.get_input_link(matching_incoming_socket.name)
+        matching_incoming_socket = tuple(input for input in self.node.inputs
+            if isinstance(input, type(self.socket_out)))
 
-        linked_socket = next((input for input in self.node.inputs if input.is_linked), None)
-        if linked_socket:
-            return self.get_input_link(linked_socket.name)
+        if len(matching_incoming_socket) > 0:
+            matched_linked_socket = next((input for input in matching_incoming_socket if input.is_linked), None)
+            if matched_linked_socket:
+                return self.get_input_link(matched_linked_socket.name)
+        else:
+            linked_socket = next((input for input in self.node.inputs if input.is_linked), None)
+            if linked_socket:
+                return self.get_input_link(linked_socket.name)
 
         return None
 
