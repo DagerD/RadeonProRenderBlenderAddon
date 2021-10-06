@@ -29,7 +29,7 @@ from rprblender.utils import logging
 log = logging.Log(tag='export.mesh')
 
 
-TRIANGLES_LARGE_AMOUNT = 1000000
+NUM_TRIANGLES_WARNING = 1000000
 
 
 @dataclass(init=False)
@@ -65,9 +65,9 @@ class MeshData:
         if tris_len == 0:
             return None
 
-        if tris_len > TRIANGLES_LARGE_AMOUNT:
+        if tris_len > NUM_TRIANGLES_WARNING:
             log.warn(f'Found object {obj.name_full} with {tris_len:,} triangles. '
-                     f'Consider simplifying geometry to less than {TRIANGLES_LARGE_AMOUNT:,} triangles')
+                     f'Consider simplifying geometry to less than {NUM_TRIANGLES_WARNING:,} triangles')
 
         data = MeshData()
         data.vertices = get_data_from_collection(mesh.vertices, 'co', (len(mesh.vertices), 3))
