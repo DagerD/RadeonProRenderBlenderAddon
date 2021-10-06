@@ -247,18 +247,16 @@ class BaseNodeParser(metaclass=ABCMeta):
     def export_muted(self):
         # export as a muted node
         # pass through first linked socket of same output socket type
-        input = next((input for input in self.node.inputs if input.is_linked), None)
-        if not input:
-            return None
+        matching_incoming_socket = next((input for input in self.node.inputs
+            if isinstance(input, type(self.socket_out)) and input.is_linked), None)
+        if matching_incoming_socket:
+            return self.get_input_link(matching_incoming_socket.name)
 
-        link = next((link for link in input.links
-            if isinstance(link.from_socket, type(self.socket_out)) and link.is_valid), None)
+        linked_socket = next((input for input in self.node.inputs if input.is_linked), None)
+        if linked_socket:
+            return self.get_input_link(linked_socket.name)
 
-        if link:
-            return self._export_node(link.from_node, link.from_socket)
-        else:
-            # if no inputs use the socket val
-            return None
+        return None
 
     def final_export(self):
         """
