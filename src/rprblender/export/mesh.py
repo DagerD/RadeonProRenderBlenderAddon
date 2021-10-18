@@ -332,7 +332,8 @@ def sync(rpr_context: RPRContext, obj: bpy.types.Object, **kwargs):
     transform = object.get_transform(obj)
     deformation_data = rpr_context.deformation_cache.get(obj_key)
 
-    if smoke_modifier and isinstance(rpr_context, RPRContext2):
+    if smoke_modifier and smoke_modifier.domain_settings.domain_type == 'GAS' \
+            and isinstance(rpr_context, RPRContext2):
         transform = volume.get_transform(obj)
         rpr_shape = rpr_context.create_mesh(
             obj_key,
