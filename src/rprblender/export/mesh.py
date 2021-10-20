@@ -332,13 +332,7 @@ def sync(rpr_context: RPRContext, obj: bpy.types.Object, **kwargs):
     transform = object.get_transform(obj)
     deformation_data = rpr_context.deformation_cache.get(obj_key)
 
-    active_material = obj.active_material
-    output_node = material.get_material_output_node(active_material) if active_material else None
-    surface_socket = next((input_socket for input_socket in output_node.inputs
-                           if input_socket.is_linked), None) if output_node else None
-
-    if smoke_modifier and not surface_socket \
-            and isinstance(rpr_context, RPRContext2):
+    if smoke_modifier and isinstance(rpr_context, RPRContext2):
         transform = volume.get_transform(obj)
         rpr_shape = rpr_context.create_mesh(
             obj_key,
