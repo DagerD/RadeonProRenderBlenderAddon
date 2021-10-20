@@ -16,6 +16,7 @@
 Export scene in a specific RPR-compatible file format
 """
 import time
+import math
 
 from bpy.props import StringProperty, BoolProperty, IntProperty, EnumProperty
 
@@ -246,7 +247,7 @@ class RPR_EXPORT_OP_export_rpr_scene(RPR_Operator, ExportHelper):
                 "normal": int(contour.use_shading_normal),
                 "uv": int(contour.use_uv),
                 "threshold.normal": contour.normal_threshold,
-                "threshold.uv": contour.uv_threshold,
+                "threshold.uv": math.radians(contour.uv_threshold * 180),
                 "linewidth.objid": contour.object_id_line_width,
                 "linewidth.matid": contour.material_id_line_width,
                 "linewidth.normal": contour.shading_normal_line_width,

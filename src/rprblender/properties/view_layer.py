@@ -120,7 +120,7 @@ class RPR_ContourProperties(RPR_Properties):
         rpr_context.set_parameter(pyrpr.CONTEXT_CONTOUR_LINEWIDTH_UV, self.uv_line_width)
 
         rpr_context.set_parameter(pyrpr.CONTEXT_CONTOUR_NORMAL_THRESHOLD, math.degrees(self.normal_threshold))
-        rpr_context.set_parameter(pyrpr.CONTEXT_CONTOUR_UV_THRESHOLD, self.uv_threshold * 180)
+        rpr_context.set_parameter(pyrpr.CONTEXT_CONTOUR_UV_THRESHOLD, math.radians(self.uv_threshold * 180))
         rpr_context.set_parameter(pyrpr.CONTEXT_CONTOUR_ANTIALIASING, self.antialiasing)
 
 
