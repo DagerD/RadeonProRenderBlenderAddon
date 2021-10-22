@@ -36,7 +36,7 @@ import pyrpr
 log = Log(tag='operators.export_scene')
 
 
-CONTOUR_AOVS = (pyrpr.AOV_GEOMETRIC_NORMAL, pyrpr.AOV_MATERIAL_ID, pyrpr.AOV_OBJECT_ID, pyrpr.AOV_UV)
+CONTOUR_AOVS = (pyrpr.AOV_SHADING_NORMAL, pyrpr.AOV_MATERIAL_ID, pyrpr.AOV_OBJECT_ID, pyrpr.AOV_UV)
 
 
 class RPR_EXPORT_OP_export_rpr_scene(RPR_Operator, ExportHelper):
