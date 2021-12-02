@@ -512,6 +512,9 @@ class Shape(Object):
         # 1.330 removes SetShadow(), use visibility Flag.
         self.set_visibility_ex("visible.shadow", casts_shadow)
 
+    def set_fake_shadow_color(self, r, g, b):
+        ShapeSetShadowColor(self, r, g, b)
+
     def set_visibility(self, visible):
         self.is_visible = visible
         ShapeSetVisibility(self, visible)

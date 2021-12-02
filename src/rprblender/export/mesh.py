@@ -309,6 +309,7 @@ def sync_visibility(rpr_context, obj: bpy.types.Object, rpr_shape: pyrpr.Shape, 
     obj.rpr.export_subdivision(rpr_shape)
 
     rpr_shape.set_contour_ignore(not obj.rpr.visibility_contour)
+    rpr_shape.set_fake_shadow_color(*obj.rpr.fake_shadow_color)
 
     if obj.rpr.portal_light:
         # Register mesh as a portal light, set "Environment" light group

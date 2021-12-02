@@ -21,6 +21,7 @@ from bpy.props import (
     PointerProperty,
     IntProperty,
     EnumProperty,
+    FloatVectorProperty
 )
 import pyrpr
 from . import RPR_Properties
@@ -124,6 +125,19 @@ class RPR_ObjectProperites(RPR_Properties):
         description="Subdivision crease weight",
         min=0.0,
         default=1.0,
+    )
+    subdivision_crease_weight: FloatProperty(
+        name="Crease Weight",
+        description="Subdivision crease weight",
+        min=0.0,
+        default=1.0,
+    )
+    fake_shadow_color: FloatVectorProperty(
+        name="Fake shadow color",
+        description="RGB Value",
+        subtype='COLOR',
+        min=0.0, max=1.0, size=3,
+        default=(0.0, 0.0, 0.0)
     )
 
     def set_catchers(self, rpr_shape):

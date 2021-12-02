@@ -44,6 +44,10 @@ class RPR_OBJECT_PT_object(RPR_Panel):
         col.prop(rpr, "motion_blur")
         col.prop(rpr, "deformation_blur")
 
+        col = self.layout.column()
+        col.enabled = context.scene.rpr.render_quality == 'FULL2'
+        col.prop(rpr, 'fake_shadow_color')
+
 
 class RPR_OBJECT_PT_visibility(RPR_Panel):
     bl_label = "Visibility"
