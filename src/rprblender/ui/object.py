@@ -34,10 +34,6 @@ class RPR_OBJECT_PT_object(RPR_Panel):
 
         self.layout.prop(rpr, 'shadowcatcher')
         self.layout.prop(rpr, 'reflection_catcher')
-        col = self.layout.column()
-
-        col.prop(rpr, 'portal_light')
-        col.enabled = context.scene.rpr.render_quality == 'FULL'  # Portal Lights are not supported in RPR2 yet
 
         col = self.layout.column()
         col.active = context.scene.render.use_motion_blur
@@ -71,6 +67,7 @@ class RPR_OBJECT_PT_visibility(RPR_Panel):
             self.layout.prop(visibility, 'transmission')
             self.layout.prop(visibility, 'shadow')
 
+        self.layout.prop(obj.rpr, 'shadow_color')
         self.layout.prop(obj.rpr, 'visibility_contour')
 
 
