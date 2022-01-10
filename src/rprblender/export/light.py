@@ -19,7 +19,7 @@ import math
 
 import bpy
 
-from rprblender.engine.context import RPRContext
+from rprblender.engine.context import RPRContext, RPRContext2
 from rprblender.properties.light import MAX_LUMINOUS_EFFICACY
 from . import mesh, image, object
 from rprblender.utils.conversion import convert_kelvins_to_rgb
@@ -146,7 +146,7 @@ def sync(rpr_context: RPRContext, obj: bpy.types.Object, instance_key=None):
         iangle = oangle * (1.0 - light.spot_blend * light.spot_blend)  # square dependency of spot_blend
         rpr_light.set_cone_shape(iangle, oangle)
         
-        if rpr_context.blender_data['depsgraph'].scene.rpr.render_quality == 'FULL2':
+        if isinstance(rpr_context, RPRContext2):
             rpr_light.set_inner_angle(iangle)
 
     elif light.type == 'AREA':
