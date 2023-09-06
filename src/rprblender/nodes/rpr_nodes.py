@@ -1032,6 +1032,10 @@ class RPRShaderNodeNormalMap(RPRShaderNode):
         def export_hybrid(self):
             return self.get_input_normal('Map')
 
+        def export_hybridpro(self):
+            print(1)
+            return self.export()
+
 
 class RPRShaderNodeEmissive(RPRShaderNode):
     """ Emissive node, only has a color and intensity """
